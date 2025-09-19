@@ -1,0 +1,72 @@
+body {
+  background:radial-gradient(circle ,rgba(0, 0, 0, 0.74)0%,rgba(4, 4, 4, 1)100% );
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 70vh;
+}
+
+
+/* Container for the entire Bento Grid */
+.main-grid {
+  display: grid;
+  grid-template-areas:
+    " wallpaper  todo   profile"
+    " music    calendar notes"
+    " screen   pomodoro reminders"; 
+    /* grid-template-columns: 2fr 2.5fr 1fr;
+  grid-template-rows: 2fr 1.5fr 1fr; */
+  gap: 1em;
+  padding: 2em;
+  height: 100vh;
+}
+
+.wallpaper      { grid-area: wallpaper; }
+.todo           { grid-area: todo; }
+.profile        { grid-area: profile; }
+.music          { grid-area: music; }
+.calendar       { grid-area: calendar; }
+.notes          { grid-area: notes; }
+.screen         { grid-area: screen; }
+.pomodoro       { grid-area: pomodoro; }
+.reminders      { grid-area: reminders; }
+
+/* Common styling for each card/module */
+.grid-tile {
+  border-radius: 1rem;
+  padding: 1.5rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  width: 100%;           
+  max-width: 100%;       
+  box-sizing: border-box;  
+  min-height: 200px;  
+  height: auto;        
+}
+
+
+
+
+/* Optional responsive spacing */
+@media (max-width: 768px) {
+
+  .bento-grid {
+    grid-template-areas:
+      "wallpaper"
+      "todo"
+      "profile"
+      "music"
+      "calendar"
+      "notes"
+      "screen"
+      "pomodoro"
+      "reminders";
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .bento-tile {
+    padding: 1rem;
+  }
+}

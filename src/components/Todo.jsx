@@ -1,11 +1,14 @@
-import "./Todo.css"
 import Task from './Task'
 import { useState } from 'react';
 
 export default function Todo() {
-const [tasks, setTasks] = useState([]);
+const [tasks, setTasks] = useState([
+  { id: 1, text: 'learn javascript', completed: true },
+  { id: 2, text: 'build ui for the productivity app', completed: false },
+  { id: 3, text: 'build ui for the productivity app', completed: false },
+  { id: 4, text: 'build ui for the productivity app', completed: false },
+]);
 const[error , setError] =useState('')
-
 
 const handleAddTask = () => {
   const newTask = { 
@@ -25,7 +28,6 @@ const handleDeleteTask=(id) =>{
     setTasks(updatedTasks);
 }
 
-
 const validation = () => {
   const hasEmptyTask = tasks.some(task => task.text.trim() === '');
   if (hasEmptyTask) {
@@ -39,9 +41,7 @@ const validation = () => {
 };
 
 const toggleTaskCompleted = (id) => {
-  // Only validate when check button is clicked
   validation();
-  // Only toggle if the task is not empty
   const taskToToggle = tasks.find(task => task.id === id);
   if (taskToToggle && taskToToggle.text.trim() !== '') {
     setTasks(tasks.map(task =>
@@ -56,47 +56,41 @@ const updateTaskText = (id, newText) => {
   ));
 };
 
-
-  // Only count completed tasks that are not empty
-  const completedCount = tasks.filter(task => task.completed && task.text.trim() !== '').length;
-  const totalValidTasks = tasks.filter(task => task.text.trim() !== '').length;
-  const progressPercent = totalValidTasks > 0 ? (completedCount / totalValidTasks) * 100 : 0;
-
   return (
     <>
-    <div className="todo-container">
-        <div className="task-list">
-            <div id="top-area">
-                <h1>TODAY'S GOALS</h1>
-                <h3 style={{color:"yellow"}}></h3>
-                <button className="add-btn"onClick={handleAddTask}> + Add new task</button>
-                <button className="clear-btn"onClick={handleClearTasks}>Clear all</button>
-                {
-                error && 
-                     <div className="errorElement" style={{ color: "red" }}>{error} </div>
-                }          
-                  </div>
-            <div id="tasks">
-             {tasks.map(task => (
-              <Task
-               key={task.id}
-               task={task}
-               onToggle={() => toggleTaskCompleted(task.id)}
-               onChange={(newText) => updateTaskText(task.id, newText)}
-               onDelete={() => handleDeleteTask(task.id)}
-              />
-            ))}
-            </div>
-        </div>
-        <div className="progress-bar">
-           <div className="progress"
-          style={{
-          height: window.innerWidth > 600 ? `${progressPercent}%` : '100%',
-          width: window.innerWidth > 600 ? '100%' : `${progressPercent}%`,
-          backgroundColor: '#fff',
-      }}>
-           </div>
-        </div>
+    <div className="w-full h-full flex flex-col">
+      <h2 className="text-2xl font-bold text-white mb-3">Today</h2>
+      
+      <div className="flex gap-2 mb-3">
+        <button 
+          className="h-6 px-2 py-0 bg-none border rounded text-gray-300 font-light text-xs transition-colors"
+          style={{ borderColor: '#888' }}
+          onClick={handleAddTask}
+        > 
+          + Add new task
+        </button>
+        <button 
+          className="h-6 px-2 py-0 bg-none border rounded text-gray-300 font-light text-xs transition-colors"
+          style={{ borderColor: '#888' }}
+          onClick={handleClearTasks}
+        >
+          Clear all
+        </button>
+      </div>
+
+      {error && <div className="text-red-500 text-xs mb-2">{error}</div>}
+
+      <div className="flex flex-col overflow-y-auto gap-2 flex-1">
+        {tasks.map(task => (
+          <Task
+            key={task.id}
+            task={task}
+            onToggle={() => toggleTaskCompleted(task.id)}
+            onChange={(newText) => updateTaskText(task.id, newText)}
+            onDelete={() => handleDeleteTask(task.id)}
+          />
+        ))}
+      </div>
     </div>
     </>
   );

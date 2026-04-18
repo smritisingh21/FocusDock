@@ -1,5 +1,4 @@
-import  { useState, useEffect, useRef } from "react";
-import "./Pomodoro.css";
+import { useState, useEffect, useRef } from "react";
 
 const Pomodoro = () => {
   const initialTime = 30 * 60; 
@@ -41,14 +40,27 @@ const Pomodoro = () => {
   };
 
   return (
-    <div className="pomodoro-container">
-      <div className="timer-display">{formatTime(timeLeft)}</div>
-      <div className="button-group">
-        <button onClick={handleStart} className="start">Start</button>
-        <button onClick={handlePauseResume} className="pause-resume">
-            {isRunning ? <span id="play-btn">&#10073;&#10073; </span > : <span id="pause-btn">&#9654; </span>}
+    <div className="w-full h-full flex flex-col justify-between items-center py-4">
+      <div className="text-6xl mb-2 drop-shadow-2xl font-mono font-bold" style={{ color: '#a6ea78' }}>{formatTime(timeLeft)}</div>
+      <div className="flex justify-center gap-2 w-full flex-wrap">
+        <button 
+          onClick={handleStart} 
+          className="px-3 py-1 bg-gray-700/60 text-gray-100 rounded-xl hover:bg-gray-600 transition-all cursor-pointer shadow-lg text-xs"
+        >
+          Start
         </button>
-        <button onClick={handleReset} className="reset"><span>⟲</span></button>
+        <button 
+          onClick={handlePauseResume} 
+          className="px-3 py-1 bg-yellow-500/40 text-gray-100 rounded-xl hover:bg-yellow-500/60 transition-all cursor-pointer shadow-lg text-xs"
+        >
+          {isRunning ? '⏸' : '▶'}
+        </button>
+        <button 
+          onClick={handleReset} 
+          className="px-3 py-1 bg-white/20 text-white rounded-xl hover:bg-white/40 transition-all cursor-pointer shadow-lg text-xs"
+        >
+          ⟲
+        </button>
       </div>
     </div>
   );

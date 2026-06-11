@@ -29,12 +29,7 @@ Feel free to contribute!
 - Bootstrap Icons
 - JavaScript
 
-## Getting Started
 
-### Prerequisites
-
-- Node.js 18+ or compatible version
-- npm or yarn
 
 ### Install
 

@@ -12,6 +12,8 @@ export default function Note() {
           backgroundPosition: '0 36px',
         }}
       />
+
+      
       <textarea
         value={text}
         onChange={e => setText(e.target.value)}

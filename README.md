@@ -2,6 +2,10 @@
 
 FocusDock is a React-based productivity dashboard that brings your essential planning tools into a single workspace. It combines task tracking, time management, notes, music, and personalization features in a clean, modern interface.
 
+
+This project is a work in progress. Improvements and new productivity modules are planned over time.
+Feel free to contribute!
+
 ## Features
 
 - ✅ To-do list for task management
@@ -14,7 +18,9 @@ FocusDock is a React-based productivity dashboard that brings your essential pla
 - 👤 Profile card placeholder for user context
 
 
-<img src="images/project-demo.png" alt="Project Demo" width="600">
+<img src="images/project-demo.png" alt="Project Demo"width="600">
+
+
 ## Built With
 
 - React 19
@@ -61,10 +67,6 @@ npm run build
 - `src/components/Calendar.jsx` — calendar overview panel
 - `src/components/Pomodoro.jsx` — Pomodoro timer panel
 
-## Notes
 
-This project is a work in progress. Improvements and new productivity modules are planned over time.
 
-## License
 
-This repository is available under the ISC License.

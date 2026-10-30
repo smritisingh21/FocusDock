@@ -27,7 +27,7 @@ import {
 const WIDGET_DEFINITIONS = {
   wallpaper: {
     id: 'wallpaper',
-    title: 'Hero Clock & Wallpaper',
+    title: 'What are you upto today?',
     icon: ImageIcon,
     badgeText: 'Aesthetics',
     minimizedSummary: 'Live digital clock & custom background banner',
@@ -35,7 +35,7 @@ const WIDGET_DEFINITIONS = {
   },
   todo: {
     id: 'todo',
-    title: 'Today Task Checklist',
+    title: 'Task Checklist',
     icon: CheckSquare,
     badgeText: 'Productivity',
     minimizedSummary: 'Task checklist with progress meter & priority filters',
@@ -43,7 +43,7 @@ const WIDGET_DEFINITIONS = {
   },
   note: {
     id: 'note',
-    title: 'Lined Sticky Note',
+    title: 'Sticky Note',
     icon: FileText,
     badgeText: 'Ideas',
     minimizedSummary: 'Lined paper scratchpad for quick notes & auto-sync',
@@ -51,7 +51,7 @@ const WIDGET_DEFINITIONS = {
   },
   music: {
     id: 'music',
-    title: 'Spotify & Music Player',
+    title: 'Music Player',
     icon: MusicIcon,
     badgeText: 'Media',
     minimizedSummary: 'Arctic Monkeys player with animated waveform & Spotify',
@@ -67,7 +67,7 @@ const WIDGET_DEFINITIONS = {
   },
   screentime: {
     id: 'screentime',
-    title: 'Screen Time & Analytics',
+    title: 'Screen Time',
     icon: Clock,
     badgeText: 'Metrics',
     minimizedSummary: 'Daily hours tracked with weekly breakdown chart',
@@ -75,7 +75,7 @@ const WIDGET_DEFINITIONS = {
   },
   pomodoro: {
     id: 'pomodoro',
-    title: 'Focus Pomodoro Timer',
+    title: 'Pomodoro ',
     icon: Timer,
     badgeText: 'Deep Work',
     minimizedSummary: 'Interval countdown timer for deep focus sprints',

@@ -15,14 +15,12 @@ export default function TopNav({ onOpenPlugins, onOpenTheme, onOpenAuth }) {
           ⚓️
         </div>
         <div className="flex items-baseline gap-2">
-          <span className="text-white font-extrabold text-base tracking-tight">FocusDock</span>
-          <span className="text-[10px] uppercase font-bold text-indigo-400 bg-indigo-950/80 px-2 py-0.5 rounded-[6px] border border-indigo-800/40">
-            PRO
-          </span>
+          <span className="text-white font-extrabold text-base tracking-tight">Focus Dock</span>
+
         </div>
 
         {/* Cloud Status Indicators */}
-        <div className="hidden lg:flex items-center gap-3 ml-4 pl-4 border-l border-white/10 text-[10px] text-slate-300">
+        {/* <div className="hidden lg:flex items-center gap-3 ml-4 pl-4 border-l border-white/10 text-[10px] text-slate-300">
           <span
             className="flex items-center gap-1 bg-white/5 px-2 py-0.5 rounded-[6px] border border-white/5"
             title="PostgreSQL Database Status"
@@ -44,7 +42,7 @@ export default function TopNav({ onOpenPlugins, onOpenTheme, onOpenAuth }) {
             <Cloud className="w-3 h-3 text-cyan-400" />
             <span>S3: Ready</span>
           </span>
-        </div>
+        </div> */}
       </div>
 
       {/* Center / Action Buttons */}
@@ -52,19 +50,16 @@ export default function TopNav({ onOpenPlugins, onOpenTheme, onOpenAuth }) {
         {/* Add Mini-App / Plugin Store Button */}
         <button
           onClick={onOpenPlugins}
-          className="px-3.5 py-1.5 rounded-[8px] bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-semibold shadow-md shadow-emerald-600/20 flex items-center gap-1.5 transition-all cursor-pointer active:scale-95"
+          className="px-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-semibold shadow-md shadow-emerald-600/20 flex items-center gap-1.5 transition-all cursor-pointer active:scale-95"
         >
-          <Layers className="w-3.5 h-3.5" />
           <span>+ Add Mini-App</span>
-          <span className="bg-white/20 text-white px-1.5 py-0.2 rounded-[6px] text-[10px] font-bold">
-            {activeCount}
-          </span>
+
         </button>
 
         {/* Change Theme & Upload Background Button */}
         <button
           onClick={onOpenTheme}
-          className="px-3 py-1.5 rounded-[8px] bg-white/10 hover:bg-white/20 text-white text-xs font-semibold border border-white/10 flex items-center gap-1.5 transition-all cursor-pointer active:scale-95"
+          className="px-3 py-1.5  bg-white/10 hover:bg-white/20 text-white text-xs font-semibold border border-white/10 flex items-center gap-1.5 transition-all cursor-pointer active:scale-95"
         >
           <Palette className="w-3.5 h-3.5 text-pink-400" />
           <span>Theme & Wallpaper</span>
@@ -75,7 +70,7 @@ export default function TopNav({ onOpenPlugins, onOpenTheme, onOpenAuth }) {
       <div className="flex items-center gap-3">
         {isAuthenticated ? (
           <div className="flex items-center gap-2">
-            <div className="flex items-center gap-2 bg-white/10 hover:bg-white/15 px-3 py-1 rounded-[8px] border border-white/10 transition-colors">
+            <div className="flex items-center gap-2 bg-white/10 hover:bg-white/15 px-3 py-3 rounded-[8px] border border-white/10 transition-colors">
               <span className="text-base">{user?.avatar_url || '👩‍💻'}</span>
               <div className="text-left hidden sm:block">
                 <p className="text-xs font-semibold text-white leading-tight">

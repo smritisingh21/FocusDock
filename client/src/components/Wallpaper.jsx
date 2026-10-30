@@ -50,14 +50,10 @@ export default function Wallpaper() {
 
       {/* Top Banner Action */}
       <div className="relative z-10 flex items-center justify-between">
-        <span className="text-[10px] font-bold uppercase tracking-wider text-white/80 bg-black/40 px-3 py-1 rounded-[6px] border border-white/10 backdrop-blur-md">
-          Personal Clock
-        </span>
-
         <button
           onClick={() => fileInputRef.current?.click()}
           disabled={isUploading}
-          className="text-xs px-3.5 py-1.5 rounded-[8px] transition-all hover:bg-black/70 active:scale-95 flex items-center gap-2 cursor-pointer text-white shadow-lg"
+          className="text-xs p-3  transition-all hover:bg-black/70 active:scale-95 flex items-center gap-2 cursor-pointer text-white shadow-lg"
           style={{
             backgroundColor: 'rgba(0, 0, 0, 0.5)',
             border: '1px solid rgba(255, 255, 255, 0.25)',
@@ -65,7 +61,7 @@ export default function Wallpaper() {
           }}
         >
           <Cloud className="w-3.5 h-3.5 text-cyan-400" />
-          <span>{isUploading ? 'Uploading to S3...' : 'Change Image'}</span>
+          <span>{isUploading ? 'Uploading...' : 'Change Image'}</span>
         </button>
         <input
           ref={fileInputRef}
@@ -77,7 +73,7 @@ export default function Wallpaper() {
       </div>
 
       {/* Clock & Date Display */}
-      <div className="relative z-10 flex flex-col items-end pr-2 py-4">
+      <div className="relative z-10 flex flex-col items-center pr-2 py-4">
         <div
           className="font-black text-white leading-none tracking-tight drop-shadow-2xl"
           style={{
@@ -101,9 +97,9 @@ export default function Wallpaper() {
       {/* Bottom Status footer */}
       <div className="relative z-10 flex items-center justify-between text-[11px] text-white/70 pt-2 border-t border-white/10">
         <span className="flex items-center gap-1.5">
-          <Sparkles className="w-3.5 h-3.5 text-amber-300" /> Focus Dock Active
+          <Sparkles className="w-3.5 h-3.5 text-amber-300" />
         </span>
-        <span className="font-mono text-[10px] opacity-80">Amazon S3 Ready</span>
+        <span className="font-mono text-[10px] opacity-80"></span>
       </div>
     </div>
   );

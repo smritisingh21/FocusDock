@@ -112,11 +112,9 @@ export default function WidgetWrapper({
       onDragOver={(e) => onDragOver && onDragOver(e, id)}
       onDragLeave={(e) => onDragLeave && onDragLeave(e, id)}
       onDrop={(e) => onDrop && onDrop(e, id)}
-      className={`relative rounded-[10px] transition-all duration-200 flex flex-col overflow-hidden select-none border border-white/10 ${
-        isDropTarget ? 'ring-2 ring-indigo-400 scale-[1.01] shadow-2xl bg-indigo-500/10' : ''
-      } ${isDragging ? 'opacity-40 scale-95' : 'opacity-100'} ${
-        isResizing ? 'ring-2 ring-indigo-500 shadow-2xl scale-[1.005]' : ''
-      } ${isMinimized ? 'h-[54px] min-h-[54px]' : 'h-full min-h-0'} ${className}`}
+      className={`relative rounded-[10px] transition-all duration-200 flex flex-col overflow-hidden select-none border border-white/10 ${isDropTarget ? 'ring-2 ring-indigo-400 scale-[1.01] shadow-2xl bg-indigo-500/10' : ''
+        } ${isDragging ? 'opacity-40 scale-95' : 'opacity-100'} ${isResizing ? 'ring-2 ring-indigo-500 shadow-2xl scale-[1.005]' : ''
+        } ${isMinimized ? 'h-[54px] min-h-[54px]' : 'h-full min-h-0'} ${className}`}
       style={{
         boxShadow: isHovered
           ? '0 16px 36px -10px rgba(0, 0, 0, 0.75), 0 0 20px rgba(255, 255, 255, 0.05)'
@@ -179,11 +177,10 @@ export default function WidgetWrapper({
           {onToggleMinimize && (
             <button
               onClick={onToggleMinimize}
-              className={`w-5 h-5 rounded-[6px] flex items-center justify-center text-xs transition-all cursor-pointer ${
-                isMinimized
-                  ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 hover:bg-amber-500/30'
-                  : 'bg-white/5 hover:bg-white/15 text-slate-400 hover:text-white border border-white/5'
-              }`}
+              className={`w-5 h-5 rounded-[6px] flex items-center justify-center text-xs transition-all cursor-pointer ${isMinimized
+                ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 hover:bg-amber-500/30'
+                : 'bg-white/5 hover:bg-white/15 text-slate-400 hover:text-white border border-white/5'
+                }`}
               title={isMinimized ? 'Expand Widget' : 'Minimize Widget'}
             >
               {isMinimized ? '+' : '−'}
@@ -194,11 +191,10 @@ export default function WidgetWrapper({
           {onToggleMaximize && !isMinimized && (
             <button
               onClick={onToggleMaximize}
-              className={`w-5 h-5 rounded-[6px] flex items-center justify-center text-xs transition-all cursor-pointer ${
-                isMaximized
-                  ? 'bg-purple-600 text-white'
-                  : 'bg-white/5 hover:bg-white/15 text-slate-400 hover:text-white border border-white/5'
-              }`}
+              className={`w-5 h-5 rounded-[6px] flex items-center justify-center text-xs transition-all cursor-pointer ${isMaximized
+                ? 'bg-purple-600 text-white'
+                : 'bg-white/5 hover:bg-white/15 text-slate-400 hover:text-white border border-white/5'
+                }`}
               title={isMaximized ? 'Restore Size' : 'Maximize to Full Focus'}
             >
               {isMaximized ? (

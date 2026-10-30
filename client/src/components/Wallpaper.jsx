@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useAuth } from '../context/AuthContext';
+import { Cloud, Upload, Sparkles } from 'lucide-react';
 
 export default function Wallpaper() {
+  const { preferences, uploadCustomBackground } = useAuth();
   const [time, setTime] = useState(new Date());
-  const [customWallpaper, setCustomWallpaper] = useState(null);
+  const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef(null);
 
   useEffect(() => {
@@ -12,68 +15,95 @@ export default function Wallpaper() {
 
   const hours = String(time.getHours()).padStart(2, '0');
   const minutes = String(time.getMinutes()).padStart(2, '0');
-  const dayName = time.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+  const dayName = time.toLocaleDateString('en-US', { weekday: 'long' });
+  const monthName = time.toLocaleDateString('en-US', { month: 'long' });
+  const dayNum = time.getDate();
+  const dateFormatted = `${dayName}, ${monthName} ${dayNum}`;
 
-  const handleFileSelect = (e) => {
+  const currentWallpaper = preferences?.background_url || '/HEROSCREEN-2025021222.webp';
+
+  const handleFileSelect = async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (ev) => setCustomWallpaper(ev.target?.result);
-    reader.readAsDataURL(file);
+
+    setIsUploading(true);
+    try {
+      await uploadCustomBackground(file);
+    } catch (err) {
+      console.error('Wallpaper upload error:', err);
+    } finally {
+      setIsUploading(false);
+    }
   };
 
-  const backgroundStyle = customWallpaper
-    ? { backgroundImage: `url(${customWallpaper})`, backgroundSize: 'cover', backgroundPosition: 'center' }
-    : { backgroundImage: 'linear-gradient(160deg, #c0622a 0%, #7b3a1a 50%, #1a0a00 100%)' };
-
   return (
-    <div className="w-full h-full relative flex overflow-hidden" style={backgroundStyle}>
+    <div
+      className="w-full h-full relative flex flex-col justify-between px-8 py-6 select-none transition-all group overflow-hidden"
+      style={{
+        backgroundImage: `url(${currentWallpaper})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
+      {/* Subtle Dark Vignette Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-black/35 pointer-events-none" />
 
-      {/* Left nav strip */}
-      <div
-        className="flex flex-col justify-start pt-10 px-5 gap-5 z-10 flex-shrink-0"
-        style={{ backgroundColor: 'rgba(0,0,0,0.22)', minWidth: '120px' }}
-      >
-        <span className="text-white/80 text-xl mb-1 select-none">☰</span>
-        {['Home', 'Settings', 'Check-list', 'Music', 'Calendar', 'Pomodoro'].map(item => (
-          <a key={item} href="#"
-            className="text-sm hover:text-white transition-colors"
-            style={{ color: 'rgba(255,255,255,0.82)', textShadow: '0 1px 4px rgba(0,0,0,0.6)' }}
-          >
-            {item}
-          </a>
-        ))}
+      {/* Top Banner Action */}
+      <div className="relative z-10 flex items-center justify-between">
+        <span className="text-[10px] font-bold uppercase tracking-wider text-white/80 bg-black/40 px-3 py-1 rounded-[6px] border border-white/10 backdrop-blur-md">
+          Personal Clock
+        </span>
+
+        <button
+          onClick={() => fileInputRef.current?.click()}
+          disabled={isUploading}
+          className="text-xs px-3.5 py-1.5 rounded-[8px] transition-all hover:bg-black/70 active:scale-95 flex items-center gap-2 cursor-pointer text-white shadow-lg"
+          style={{
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            border: '1px solid rgba(255, 255, 255, 0.25)',
+            backdropFilter: 'blur(8px)',
+          }}
+        >
+          <Cloud className="w-3.5 h-3.5 text-cyan-400" />
+          <span>{isUploading ? 'Uploading to S3...' : 'Change Image'}</span>
+        </button>
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="image/*"
+          onChange={handleFileSelect}
+          className="hidden"
+        />
       </div>
 
-      {/* Right: button + clock */}
-      <div className="flex-1 flex flex-col">
-        <div className="flex justify-end p-3">
-          <button
-            onClick={() => fileInputRef.current?.click()}
-            className="text-xs px-3 py-1 rounded-md hover:bg-black/40 transition-all"
-            style={{
-              color: 'rgba(255,255,255,0.75)',
-              backgroundColor: 'rgba(0,0,0,0.25)',
-              border: '1px solid rgba(255,255,255,0.25)',
-            }}
-          >
-            change picture
-          </button>
-          <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileSelect} className="hidden" />
+      {/* Clock & Date Display */}
+      <div className="relative z-10 flex flex-col items-end pr-2 py-4">
+        <div
+          className="font-black text-white leading-none tracking-tight drop-shadow-2xl"
+          style={{
+            fontSize: '4.2rem',
+            fontFamily: 'system-ui, -apple-system, sans-serif',
+            textShadow: '0 4px 28px rgba(0, 0, 0, 0.9)',
+          }}
+        >
+          {hours}:{minutes}
         </div>
+        <div
+          className="mt-2 text-sm font-semibold tracking-wide text-white/95"
+          style={{
+            textShadow: '0 2px 14px rgba(0, 0, 0, 0.85)',
+          }}
+        >
+          {dateFormatted}
+        </div>
+      </div>
 
-        <div className="flex flex-col items-center mt-4 px-4">
-          <div className="font-bold text-white leading-none"
-            style={{ fontSize: '56px', textShadow: '0 2px 20px rgba(0,0,0,0.4)' }}
-          >
-            {hours}:{minutes}
-          </div>
-          <div className="mt-2 text-sm font-medium"
-            style={{ color: 'rgba(255,255,255,0.85)', textShadow: '0 1px 8px rgba(0,0,0,0.5)' }}
-          >
-            {dayName}
-          </div>
-        </div>
+      {/* Bottom Status footer */}
+      <div className="relative z-10 flex items-center justify-between text-[11px] text-white/70 pt-2 border-t border-white/10">
+        <span className="flex items-center gap-1.5">
+          <Sparkles className="w-3.5 h-3.5 text-amber-300" /> Focus Dock Active
+        </span>
+        <span className="font-mono text-[10px] opacity-80">Amazon S3 Ready</span>
       </div>
     </div>
   );

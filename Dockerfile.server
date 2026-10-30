@@ -1,0 +1,23 @@
+# FocusDock API Server Dockerfile
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+# Install build dependencies
+COPY server/package*.json ./
+RUN npm ci
+
+COPY server/ ./
+
+# Production runner
+FROM node:20-alpine AS runner
+
+WORKDIR /app
+ENV NODE_ENV=production
+ENV PORT=5001
+
+COPY --from=builder /app ./
+
+EXPOSE 5001
+
+CMD ["node", "app.js"]

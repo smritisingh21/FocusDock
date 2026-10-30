@@ -27,3 +27,31 @@ html, body, #root {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(156, 163, 175, 0.5);
 }
+
+/* Modern Web Guidance: Dedicated Drag Handle Affordances */
+.drag-handle {
+  cursor: grab;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.drag-handle:active,
+.drag-handle.dragging {
+  cursor: grabbing;
+}
+
+/* Bento Resizing Cursor & Interaction Styles */
+.resize-handle {
+  cursor: se-resize !important;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+body.is-resizing-bento,
+body.is-resizing-bento * {
+  cursor: se-resize !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}
